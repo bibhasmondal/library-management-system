@@ -20,7 +20,7 @@ def ws_connect(message):
 
 @channel_session
 def ws_message(message):
-    searchebooks(Group("library"),message.get('text'))
+    searchebooks(message.reply_channel,message.get('text'))
 # Connected to websocket.disconnect
 
 

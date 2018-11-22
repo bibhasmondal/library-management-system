@@ -1,9 +1,9 @@
 import requests
 import bs4
 import json
-def searchbooks(group,name):
+def searchbooks(reply_channel,name):
     try:
-        url="http://libgen.is/search.php?&res=100&page=1&req="
+        url="http://libgen.is/search.php?&page=1&req="
         url += name
         res = requests.get(url)
         res.raise_for_status()
@@ -18,6 +18,6 @@ def searchbooks(group,name):
             'size':elem[i].select('td')[7].getText(),\
             'type':elem[i].select('td')[8].getText(),\
             'author':elem[i].select('td')[1].getText()}
-            group.send({'text':json.dumps(result)})
+            reply_channel.send({'text':json.dumps(result)})
     except Exception as e:
         print(e)
