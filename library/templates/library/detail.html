@@ -1,0 +1,61 @@
+{% extends 'home/base.html' %}
+{% block title %} {{ reqbook.title }} | Library {% endblock %}
+{% block styles %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'library/detail.css' %}">
+{% endblock %}
+{% block mininav %}
+    {% include 'library/mininav.html' %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <a href="{{reqbook.get_edit_url}}">Click here to edit this book</a>
+        <div class="col-sm-8">
+            <div class="row">
+                {% if reqbook.image %}
+                    <div class="row" style="margin-top:20px">
+                        <a href="{{ reqbook.image.url }}" class="bookimage"><img src='{{ reqbook.image.url }}' class="col-sm-2" style="width:160px;height:180px;float:left"><span class="tooltiptext">Show image</span></a>
+                    </div>
+                {% endif %}
+                <div class="btitle text-warning">
+                    <h1>{{ reqbook.title }}</h1>
+                </div>
+                <div class="text-success bauthor">
+                    <h2>{{ reqbook.author }}</h2>
+                </div>
+                <div class="text-info">
+                    <h2>{{ reqbook.subject }}</h2>
+        
+                </div>
+                {% if reqbook.publisher %}
+                    <div class="text-info">
+                        <h2> Publisher: {{reqbook.publisher}}</h2>
+                    </div>
+                {% endif %}
+                <div class="text-info">
+                    <h2>ID: {{ reqbook.pk }}</h2>
+                </div>
+                <div class="text-warning">
+                    <h2> {% if reqbook.issued %}Currently Issued Out! {% endif %}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row col-sm-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <h2>Request this book:</h2><br />
+                </div>
+                <form class="form-horizontal" action="." method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {% include 'library/form-template.html' %}
+                        <div style="float:left;padding-bottom:30px">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                        <!--Request form ends -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

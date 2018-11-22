@@ -1,0 +1,95 @@
+{% extends 'home/base.html' %}
+{% block title %}
+    Library | Index
+{% endblock %}
+{% load staticfiles %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'library/allbook.css' %}">
+{% endblock %}
+{% block mininav %}
+    {% include 'library/mininav.html' %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div id=body class="big" style="padding-top:20px">
+            <div class="col-sm-12">
+                <div class="table_head col-sm-4">
+                    Book Title
+                </div>
+                <div class="table_head col-sm-2">
+                    Author(s)
+                </div>
+                <div class="table_head col-sm-3">
+                    Publisher
+                </div>
+                <div class="table_head col-sm-3">
+                    Subject
+                </div>
+            </div><br /><hr style="margin-top:0;margin-bottom:5px"/>            
+
+            {% for book in object_list %}
+                {% if book.issued %}
+                    <div class="issued col-sm-12">
+                {% else %}
+                    <div class="index_row col-sm-12">
+                {% endif %}
+                    <a href={{ book.get_absolute_url }}>
+                        <div class="data col-sm-4">
+                            {{ book.title }}
+                        </div>
+                        <div class="data col-sm-2">
+                            {{ book.author }}
+                        </div>
+                        <div class="data col-sm-3">
+                            {% if book.publisher %}
+                                {{ book.publisher}}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </div>
+                        <div class="data col-sm-3">
+                            {{ book.subject.title }}
+                        </div>
+                    </a><br>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="body2" class="small" style="padding-top:10px">
+            {% for book in object_list %}
+                <div class="panel-group" style="margin-bottom:2px">
+                    <div class="panel panel-default" style="border-color:green" > 
+                        {% if book.issued %}
+                            <button id="panelon" type="button" data-toggle="collapse" style="text-align:left;color:red;background-color:yellow;border-color:green"data-target="#{{book.id}}" class="btn btn-block container-fluid">
+                        {% else %}
+                            <button id="panelon" type="button" data-toggle="collapse" style="word-wrap:break-word;text-align:left;color:darkblue;background-color:yellow;border-color:green"data-target="#{{book.id}}"class="btn btn-block container-fluid">
+                        {% endif %}
+                        <h5 style="overflow:hidden">{{ book.title }} by {{book.author}}</h5></button>
+                        <div id="{{book.id}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <a href={{ book.get_absolute_url }}>
+                                <div class="container-fluid">
+                                    <b>Book Title:</b> {{ book.title }}
+                                </div>
+                                <div class="container-fluid">
+                                    <b>Author(s):</b> {{ book.author }}
+                                </div>
+                                <div class="container-fluid">
+                                    <b>Publisher:</b> 
+                                    {% if book.publisher %}
+                                        {{ book.publisher}}
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </div>
+                                <div class="container-fluid">
+                                    <b>Subject:</b> {{ book.subject.title }}
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %} 
+        </div>  
+    </div>  
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'home/base.html' %}
+{% block title %} Create Account | Account {% endblock %}
+{% block styles %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'account/register.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid row">
+        <h2 class="container-fluid"> Create an account.</h2><br />
+        <form class="form-group" action="." method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form">
+                <div class="col-sm-6">
+                    {% for field in form %}
+                        <div class="col-sm-7">
+                            <label class="text-danger small" style="position:absolute;margin-top:-20px;margin-left:-20px">
+                                {{ field.errors }}
+                            </label>
+                            {{ field }}<br />
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-6">
+                    {% load set_variable %}
+                    {% set as control %}
+                    {% for field in b_form %}
+                        {% if control != 5 %}
+                            {% set control as control %}
+                                <div class="container-fluid row">
+                                    <div class="col-sm-7">
+                                        <label class="text-danger small" style="position:absolute;margin-top:-20px;margin-left:-20px">
+                                            {{ field.errors }}
+                                        </label>
+                                        {{ field }}<br />
+                                    </div>
+                                </div>
+                        {% else %}
+                        
+                            <div class="col-sm-3">
+                                <div style="width:100px;float:left">
+                                    {{ field.label_tag }}
+                                </div>
+                                <div style="float:left">
+                                    <label class="switch" id="evening">
+                                        {{ field }}
+                                        <span class="slider"></span>
+                                    </label>
+                                </div><br /><br />
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-12" style="margin-top:-20px">
+                <div class="container-fluid">
+                    <input type="submit" class="btn btn-success" style="float:left" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

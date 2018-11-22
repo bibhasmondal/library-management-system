@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title id="title">{% block title %}{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load staticfiles %}
+        <link rel="shortcut icon" href="{% static 'home/favicon.ico' %}" />
+        <link rel="icon" href="{% static 'home/logo.png' %}" type="image/x-icon" />
+        <link rel="stylesheet" href="{% static 'home/bootstrap.min.css' %}">
+        <link href="{% static 'home/latofont.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'home/montserratfont.css' %}" rel="stylesheet" type="text/css">
+        <script src="{% static 'home/jquery.min.js' %}"></script>
+        <script src="{% static 'home/bootstrap.min.js' %}"></script>
+        <link href="{% static 'home/materialicons.css' %}" rel="stylesheet">
+        <link href="{% static 'home/font-awesome.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'home/base.css' %}">
+        {% block styles %}
+        {% endblock %}
+        {% load get_view %}
+    </head>
+    <body>
+        {% if not request|isappview %}
+            <nav class="navbar navbar-default navbar-fixed-top">
+
+                <div class="container-fluid">
+
+                    <div style="float:right;font-size:20px;margin-top:10px;margin-right:-10px;margin-left:110px">
+                        {% if request.user.is_authenticated %}
+                            <a data-toggle="collapse" href="#navLogin" ><img src="data:image/jpeg;base64,{{request.user.student.dp}}" style="width:40px;height:40px;margin-top:5px;" class="img-circle" alt="{{request.user.student|sf }}"></a>
+                        {% else %}
+                            <a data-toggle="collapse" href="#navLogin" class="navlogin"><i style="margin-top:15px;margin-left:-35px" class="material-icons">&#xe7fe;</i><span class="tooltiptext">Sign in</span></a>
+                        {% endif %}
+                    </div>
+
+                    <div id="navLogin" class="collapse" style="position:absolute;background-color:#e0e0de;right:0;top:63px;border-radius:5px;z-index:1;">
+
+                        <div>
+                            <span class="rightuppertriangle"></span><span class="leftuppertriangle"></span>
+                        </div>
+
+                        <div class="container-fluid">
+                            {% if request.user.is_authenticated %}
+                                <div class="row" style="padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px">
+                                    <div class="user">
+                                        <a href="{% url 'account:home' %}"><img src="data:image/jpeg;base64,{{request.user.student.dp}}" style="width:60px;height:60px" class="img-circle" alt="{{request.user.student|sf }}"><span class="tooltiptext">Account info</span></a>
+                                    </div>
+                                    <div style="margin-top:-10px;float:left">
+                                        <b style="font-size:15px;color:black">{{request.user.student}}</b><br />
+                                        <label style="font-size:11px;letter-spacing:0px">{{request.user.email}}</label>
+                                    </div><br />
+                                    <button id="logout" class="btn btn-primary" style="float:right;letter-spacing:2px">Sign out</button><br />
+                                </div>
+                            {% else %}
+                                {% include 'account/login.html' %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="navbar-header">
+                        <button id="navbtn" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="float:left">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="text-center" href="{% url 'home:home' %}"><img src="{% static 'home/library_logo.png' %}" alt="VC" style="width:300px;height:60px;margin-top:5px;margin-bottom:5px"></a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav navbar-right">
+
+                        {% if 'home' in request.resolver_match.app_name and 'about' not in request.path %}
+                            <li  class="active"><a>HOME</a></li>
+                        {% else %}
+                            <li><a href="{% url 'home:home' %}">HOME</a></li>
+                        {% endif %}
+
+                        {% if 'library' in request.resolver_match.app_name %}
+                            <li class="active"><a href="{% url 'library:home' %}">LIBRARY</a></li>
+                        {% else %}
+                            <li><a href="{% url 'library:home' %}">LIBRARY</a></li>
+                        {% endif %}
+
+                        {% if 'about' in request.path %}
+                            <li class="active"><a href="{% url 'home:about' %}">ABOUT</a></li>
+                        {% else %}
+                            <li><a href="{% url 'home:about' %}">ABOUT</a></li>
+                        {% endif %}
+
+                        </ul>
+                    </div>
+
+                </div>
+
+            </nav>
+
+            <div id="myBody" style="position:absolute;left:0;right:0;top:70px;bottom:64px;overflow-y:auto;overflow-x:hidden">
+                {% block mininav %}
+                {% endblock %}
+        {% else %}
+            <div style="position:absolute;left:0;right:0;top:0px;bottom:0px;overflow-y:auto;overflow-x:hidden">
+        {% endif %}
+
+            {% if messages %}
+                <div class="container-fluid">
+                    {% for message in messages %}
+                        <label class="{{ message.tags }}">
+                            {{ message }}
+                        </label>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="container-fluid row">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+        </div>
+        {% if not request|isappview %}
+            <!-- Footer -->
+            <footer class="navbar-fixed-bottom navbar-inverse container-fluid text-center" >
+                <p style="text-align:center">&copy; Copyright 2018 | Library Management<br>All Rights Reserved</p>
+            </footer>
+        {% endif %}
+        <script src="{% static 'home/base.js' %}" type="text/javascript"></script>
+    </body>
+</html>

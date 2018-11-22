@@ -1,0 +1,54 @@
+﻿<div class="container-fluid"style="margin-top:-30px">
+    <div class="navbar-header" >
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miniNavbar" style="float:left;background-color:transparent;margin-bottom:0px;margin-top:0px;margin-right:0px;padding-top:5px">
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse" id="miniNavbar" style="padding-top:0px">
+        <ul class="nav navbar-nav">
+            {% if not 'library' in request.resolver_match.url_name %}
+                <li><a  href="{% url 'library:library'%}">All Books</a></li>
+            {% else %}
+                <li class="active"><a  href="{% url 'library:library'%}">All Books</a></li>
+            {% endif %}
+            {% if not 'dashboard' in request.resolver_match.url_name %}
+                <li><a  href="{% url 'library:user_dashboard'%}">Dashboard</a></li>
+            {% else %}
+                <li class="active"><a  href="{% url 'library:user_dashboard' %}">Dashboard</a></li>
+            {% endif %}
+            {% if request.user.is_superuser %}
+                {% if not 'add' in request.resolver_match.url_name %}
+                    <li><a href="{% url 'library:add'%}">Add a Book</a></li>
+                {% else %}
+                    <li class="active"><a href="{% url 'library:add'%}">Add a Book</a></li>
+                {% endif %}
+                {% comment %}
+                    {% if not 'new' in request.resolver_match.url_name %}
+                        <li><a href="{% url 'library:new'%}">Request Unregistered</a></li>
+                    {% else %}
+                        <li class="active"><a href="{% url 'library:new'%}">Request Unregistered</a></li>
+                    {% endif %}
+                {% endcomment %}
+                {% if not 'admin_dash' in request.resolver_match.url_name %}
+                    <li><a href="{% url 'library:admin_dash'%}">Admin Dashboard</a></li>
+                {% else %}
+                    <li class="active"><a href="{% url 'library:admin_dash'%}">Admin Dashboard</a></li>
+                {% endif %}
+            {% endif %}
+        </ul>
+        <div class="col-sm-3 col-md-3 col-xs-12" style="float:right">
+            <form action="{% url 'library:search' %}" class="navbar-form" role="search">
+                <div class="input-group">
+                    {% if 'search' in request.resolver_match.url_name %}
+                        <input type="text" id="query" class="form-control" placeholder="Search" name="q"  value="{{ query }}">
+                    {% else %}
+                        <input type="text" class="form-control" placeholder="Search" name="q">
+                    {% endif %}
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

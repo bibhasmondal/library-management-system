@@ -1,0 +1,40 @@
+{% extends 'home/base.html' %}
+{% block title %} Profile | Account {% endblock %}
+{% load staticfiles %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'account/profile.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="col-sm-4 text-center col-sm-offset-4" style="padding:6% 0">
+            <div class="panel panel-primary" style="padding-top:0px">
+                <div class="panel-heading" style="height:50px;padding-top:1px">
+                    <h4><b style="color:whitesmoke">{{ request.user.first_name }} {{ request.user.last_name }}</b></h4>
+                </div>
+                <div class="panel-body text-left">
+                    <div class="detail col-sm-12 col-xs-12">
+                        <div class="field">Name:</div>
+                        <div class="value">{{ request.user.first_name }} {{ request.user.last_name }}</div>
+                        <a href="{% url 'account:editdetails' %}" class="editlink"><img src="data:image/jpeg;base64,{{request.user.boarder.dp}}" style="width:60px;height:60px;margin-top:-20px;margin-bottom:-15px" class="img-circle"><span class="tooltiptext">Change picture</span></a>
+                    </div>
+                    <div class="detail col-sm-12 col-xs-12">
+                        <div class="field">Email:</div>
+                        <div class="value">{{ request.user.email }}</div>
+                    </div>
+                    <div class="detail col-sm-12 col-xs-12">
+                        <div class="field">Username:</div>
+                        <div class="value">{{ request.user.username }}</div>
+                    </div>
+                    <div class="detail col-sm-12 col-xs-12">
+                        <div class="field">Password:</div>
+                        <div class="value">(<a href="{% url 'account:changepassword' %}">change</a>)</div>
+                    </div>
+                    <div class="detail col-sm-12 col-xs-12">
+                        <div class="field">Staff:</div>
+                        <div class="value">{% if request.user.is_staff %} Yes {% endif %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+.bookimage{
+    letter-spacing:0px;
+}
+.bookimage .tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 10px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 200px;
+    left: 25px;
+    font-size: 10px;
+    letter-spacing: 0px;
+}
+
+.bookimage:hover .tooltiptext {
+    visibility: visible;
+}

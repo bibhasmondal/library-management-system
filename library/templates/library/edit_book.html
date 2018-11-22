@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+{% block title %} Edit Book | Library {% endblock %}
+{% block mininav %}
+    {% include 'library/mininav.html' %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="col-sm-5 col-sm-offset-3 text-center">
+            <h2>Edit book:</h2><h6>Authors' names should be last-name-only, separated by only a comma. E.g.: 'Roberts', 'Das, Pal', etc. <br>Images aren't necessary. <br> For multiple copies of the same book, add #2, or #3  after the title.</h6>
+        </div>
+        <div class="col-sm-4 col-sm-offset-4">
+            <form class="form-horizontal" action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {% include 'library/form-template.html' %}
+                    <div style="float:left">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

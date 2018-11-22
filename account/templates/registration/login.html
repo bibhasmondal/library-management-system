@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+{% block title %} Login | VC {% endblock %}
+{% block styles %}
+{% load staticfiles %} 
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="col-sm-4 text-center col-sm-offset-4" style="padding:8% 5%">
+            <div class="panel panel-primary" style="padding-top:0px">
+                <div class="panel-heading" style="height:50px;padding-top:1px">
+                    <h4><b style="color:whitesmoke">Login</b></h4>
+                </div>
+                <div class="panel-body text-left">
+                    <div class="container-fluid text-danger small">
+                        {{errors}}
+                    </div>
+                    <form class="form" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div style="display:block;padding-bottom:20px">
+                            <a href="{% url 'account:forgotpassword' %}"><b>Forgot Password</b></a><br />
+                            <a href="{% url 'account:register' %}"><b>Create account</b></a>
+                        </div>
+                        <input type="submit" class="btn btn-success" style="float:left" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

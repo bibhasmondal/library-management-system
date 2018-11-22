@@ -1,0 +1,105 @@
+.wrapper {
+    display: grid;
+    grid-gap: 35px;
+    grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+}
+.outslot {
+    height: 12.7em;
+    line-height: 1.3em;
+    border: 1px solid black;
+    background-color: pink;
+    align-content: center;
+    padding: 5px 5% 5px 5%;
+    border-radius: 5px 5px 5px 5px;
+    position: absolute;
+    width: 130px;
+}
+.inslot {
+    align-content: center;
+    background-color: yellow;
+    border: 2px solid green;
+    border-radius: 5px;
+    padding: 3px;
+    opacity: 1;
+    position: absolute;
+    left: 7px;
+    right: 7px;
+    top:7px;
+    bottom:7px;
+}
+.slot {
+    height: 13em;
+    border: none;
+    align-content: center;
+    background-color: inherit;
+    text-align: right;
+    /*border: 2px solid green;*/
+}
+
+.slot .username {
+    font-weight: bold;
+    color: blue;
+    opacity: .6;
+}
+
+.bookdetails {
+    text-align: left;
+    position: absolute;
+    bottom: 8px;
+    font-size: 11px;
+    line-height: 1.3em;
+}
+
+.bookdetails .booktitle {
+    color: red;
+    opacity: .7;
+}
+
+.bookdetails .bookauthor {
+    color: navy;
+}
+
+.bookdetails .bookcode {
+    color: black;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: bolder;
+}
+
+.slotoptions {
+    align-content: center;
+    line-height: 1.3em;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    background-color: whitesmoke;
+    opacity: 1;
+    position: absolute;
+    left: 7px;
+    right: 7px;
+    top: 7px;
+    bottom: 7px;
+}
+
+.slotoptions .bookcode {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    opacity: .6;
+    font-weight: bold;
+    color: navy;
+}
+
+.slotoptions .change {
+    font-size: 12px;
+}
+
+.slotoptions .undo {
+    font-size: 12px;
+}
+.inslot:hover {
+    opacity: 0;
+}
+.slotoptions:not(:hover) {
+    opacity: 0;
+}

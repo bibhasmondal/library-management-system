@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+{% block title %} Request new | Library {% endblock %}
+{% block mininav %}
+    {% include 'library/mininav.html' %}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="col-sm-5 col-sm-offset-3 text-center">
+            <h2>Request an unregistered book,<br />which is not issued out: </h2><h5> Put in relevant details for the book needed, and enter your name. We will accomodate your request as soon as possible.</h5>
+        </div>
+        <div class="col-sm-4 col-sm-offset-4">
+            <form class="form-horizontal" action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {% include 'library/form-template.html' %}
+                    <div style="float:left">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

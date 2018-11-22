@@ -1,0 +1,72 @@
+.table_head {
+    color: blue;
+    font-weight: bold;
+}
+
+.data {
+    color: green;
+    line-height: 1.3em;
+}
+
+.index_row:hover {
+    margin-left: 13px;
+    font-weight: bold;
+    background-color: yellow;
+}
+
+.index_row:not(:hover) {
+    overflow: hidden;
+    height: 1.3em;
+}
+
+.issued:not(:hover) {
+    overflow: hidden;
+    height: 1.3em;
+}
+
+.issued:hover {
+    margin-left: 13px;
+    font-weight: bold;
+}
+
+    .issued:hover .data {
+        color: red;
+        background-color: yellow;
+    }
+
+a:hover {
+    text-decoration: none;
+}
+
+@media only screen and (max-width:771px) {
+    .big {
+        position: absolute;
+        text-align: left;
+        display: none;
+    }
+
+    .small {
+        z-index: 1;
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        text-align: left;
+        display: block;
+    }
+}
+
+@media only screen and (min-width:772px) {
+    .big {
+        position: absolute;
+        text-align: left;
+        display: block;
+    }
+
+    .small {
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        text-align: left;
+        display: none;
+    }
+}

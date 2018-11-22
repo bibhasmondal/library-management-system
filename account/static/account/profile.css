@@ -1,0 +1,38 @@
+.field{
+	float:left;
+	padding-right: 1px;
+	font-weight: bold;
+	width: 100px;
+}
+
+.value{
+	float: left;
+	color: brown;
+}
+
+.detail {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.editlink {
+	float: right;
+}
+
+.editlink .tooltiptext {
+	visibility: hidden;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 5px 10px;
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 55px;
+	right: 0px;
+	font-size: 10px;
+	letter-spacing: 0px;
+}
+
+.editlink:hover .tooltiptext {
+	visibility: visible;
+}

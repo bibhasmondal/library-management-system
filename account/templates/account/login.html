@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<form class="form" id="loginform" metdod="post">
+    <div id="error" style="color:red"></div>
+    {% csrf_token %}
+    <div class="form-group" id="login"><br />
+        {% for field in loginform %}
+            {{ field.errors }}
+            {{ field }}<br />
+        {% endfor %}
+        <div style="display:block">
+            <a href="{% url 'account:forgotpassword' %}"><b>Forgot Password</b></a><br />
+            <a href="{% url 'account:register' %}"><b>Create account</b></a>
+        </div><br />
+        <input type="submit" class="btn btn-primary" style="letter-spacing:2px" value="Login" />
+    </div>
+</form>
+<script src="{% static 'account/login.js' %}" type="text/javascript"></script>

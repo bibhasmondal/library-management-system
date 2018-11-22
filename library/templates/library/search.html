@@ -1,0 +1,47 @@
+{% extends 'home/base.html' %}
+{% block title %} Search | Library {% endblock %}
+{% load staticfiles %}
+{% block styles %}    
+    <link rel="stylesheet" href="{% static 'library/search.css' %}">
+{% endblock %}
+{% block mininav %}
+    {% include 'library/mininav.html' %}
+{% endblock %}
+{% block content %}
+    <div class="heading container-fluid" style="position:absolute;left:0;right:0"><h2>Search Results</h2>
+        <div class="row">
+            <div class="col-sm-6" style="float:left">
+                <h3 style="text-align:left">{{ results|length }} book{{ results|pluralize }} found.</h3>
+                    <div class="row container-fluid text-left">
+                        {% for book, count in results %} 
+                            <div class="container-fluid {% cycle 'row1' 'row2' %}" style="text-align:left">
+                                <a href="{{ book.get_absolute_url }}">
+                                    <div class="col-sm-2"> ({{ book.subject.code}}{{book.id}})</div>
+                                    <div class="col-sm-3"> {{ book.author }}</div>
+                                    <div class="col-sm-7">
+                                        {{book.title}}
+                                        {% if book.issued %}<sup>[Issued Out]</sup><sub style="margin-left:-55px">{{book.issued_name.student}}</sub>{% endif %}
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+            </div>
+            <div class="col-sm-6 col-xs-12" id="results">
+                <div class="container-fluid">
+                    <h3 style="text-align:left" id="ebookscount">Searching ebooks...</h3>
+                    <div style="display:none" class="row text-left animate-bottom" id="ebooksdata">
+                            
+                    </div>
+                </div>
+                <div style="padding: 10% 0%">
+                    <div id="loader"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><a href="{% url 'library:search' %}?q=Fiction">Fiction</a></div>
+        </div>
+    </div>
+    <script src="{% static 'library/esearch.js' %}" type="text/javascript"></script >   
+{% endblock %}
